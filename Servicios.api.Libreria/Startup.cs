@@ -38,8 +38,17 @@ namespace Servicios.api.Libreria
 
             services.AddSingleton<MongoSettings>();
 
+            //Se crean cada vez que el cliente quiere ejecutar un api
             services.AddTransient<IAutorContext, AutorContext>();
             services.AddTransient<IAutorRepository, AutorRepository>();
+
+            /**
+             * AddScoped
+             * 
+             * Va a trabajar cada ves que un cliente haga un request a un controller,
+             * cuando el request termine se va a destroir 
+             **/
+            services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
