@@ -11,12 +11,13 @@ namespace Servicios.api.Seguridad.Core.Persistence
         {
             if (!userManager.Users.Any())
             {
-                var usuario = new Usuario{
-                    Nombre="Anthony",
-                    Apellido="Cardona",
-                    Direccion="Los Chiles",
-                    UserName= "akcardona",
-                    Email="akcardona0912@gmail.com"
+                var usuario = new Usuario
+                {
+                    Nombre = "Anthony",
+                    Apellido = "Cardona",
+                    Direccion = "Los Chiles",
+                    UserName = "akcardona",
+                    Email = "akcardona0912@gmail.com"
                 };
 
                 await userManager.CreateAsync(usuario, "Password123$");

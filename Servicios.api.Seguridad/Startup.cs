@@ -1,3 +1,6 @@
+using AutoMapper;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Servicios.api.Seguridad.Core.Aplication;
 using Servicios.api.Seguridad.Core.Entities;
 using Servicios.api.Seguridad.Core.Persistence;
 using System;
@@ -58,6 +62,12 @@ namespace Servicios.api.Seguridad
 
             //Registra la hora y el dia cuando el usuario inicia sesion
             services.TryAddSingleton<ISystemClock, SystemClock>();
+
+
+            services.AddMediatR(typeof(Register.UsuarioRegisterCommand).Assembly);
+            services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
+
+            services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Register>());
         }
 
 
