@@ -87,6 +87,14 @@ namespace Servicios.api.Seguridad
                     ValidateIssuer = false
                 };
             });
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsRule", rule =>
+                {
+                    rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*");
+                });
+            });
         }
 
 
@@ -104,6 +112,8 @@ namespace Servicios.api.Seguridad
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsRule");
 
             app.UseAuthentication();
 
