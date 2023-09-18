@@ -19,7 +19,7 @@ namespace Servicios.api.Seguridad
         {
             //CreateHostBuilder(args).Build().Run();
             var hostServer = CreateHostBuilder(args).Build();
-            using(var contexto = hostServer.Services.CreateScope())
+            using (var contexto = hostServer.Services.CreateScope())
             {
                 var services = contexto.ServiceProvider;
                 try
@@ -29,7 +29,7 @@ namespace Servicios.api.Seguridad
 
                     SeguridadData.InsertarUsuario(contextEF, userManager).Wait();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     var logging = services.GetRequiredService<ILogger<Program>>();
                     logging.LogError(ex, "Error cuando registra el usuario");
